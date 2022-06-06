@@ -83,14 +83,14 @@ class _ContactScreenState extends State<ContactScreen>
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-          child: Icon(Icons.phone_outlined),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           onPressed: () {},
+          child: const Icon(Icons.phone_outlined),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Calls",
             style: TextStyle(color: Colors.black),
           ),
@@ -120,7 +120,7 @@ class _ContactScreenState extends State<ContactScreen>
                 indicatorColor: Colors.black,
                 unselectedLabelColor: Colors.black45,
                 controller: tabController,
-                tabs: [
+                tabs: const [
                   Tab(
                     child: Text("All"),
                   ),
@@ -151,14 +151,14 @@ class _ContactScreenState extends State<ContactScreen>
                                   return ListTile(
                                     leading: Container(
                                         padding: const EdgeInsets.all(10),
-                                        child: const Icon(
-                                          Icons.phone_callback_outlined,
-                                          color: Colors.white,
-                                        ),
                                         decoration: BoxDecoration(
                                             color: const Color(0xfff0547b),
                                             borderRadius:
-                                                BorderRadius.circular(15))),
+                                                BorderRadius.circular(15)),
+                                        child: const Icon(
+                                          Icons.phone_callback_outlined,
+                                          color: Colors.white,
+                                        )),
                                     title: Row(
                                       children: [
                                         Expanded(
@@ -192,16 +192,20 @@ class _ContactScreenState extends State<ContactScreen>
                                   );
                                 } else {
                                   return Center(
-                                      child: index >= contacts!.length
-                                          ? const Text(
-                                              "You have reached end of the list")
-                                          : const CircularProgressIndicator());
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 50),
+                                        child: index >= contacts!.length
+                                            ? const Text(
+                                                "You have reached end of the list")
+                                            : const CircularProgressIndicator()),
+                                  );
                                 }
                               }),
                         ),
-                  SizedBox(),
-                  SizedBox(),
-                  SizedBox(),
+                  const SizedBox(),
+                  const SizedBox(),
+                  const SizedBox(),
                 ],
               ),
             ),
