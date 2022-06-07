@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:assessment/services/json_services.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +23,6 @@ class _ContactScreenState extends State<ContactScreen>
   int takeIndex = 10;
   late TabController tabController;
 
-  var randomContacts = [
-    {"user": "1", "phone": "0152131113", "check-in": "2020-06-30 16:10:05"},
-    {"user": "2", "phone": "0161231346", "check-in": "2020-07-11 15:39:59"},
-    {"user": "3", "phone": "0158398109", "check-in": "2020-08-19 11:10:18"},
-    {"user": "4", "phone": "0168279101", "check-in": "2020-08-19 11:11:35"},
-    {"user": "5", "phone": "0112731912", "check-in": "2020-08-15 13:00:05"},
-  ];
 
   @override
   void initState() {
@@ -218,8 +211,12 @@ class _ContactScreenState extends State<ContactScreen>
   Future loadRandomData() async {
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
-      contacts!.addAll(randomContacts.take(5));
-      _suggestions.addAll(randomContacts.take(5));
+      int last = contacts!.length;
+      for (var i = 0; i < 5; i++) {
+        int index = Random().nextInt(last);
+        _suggestions.add(contacts![index]);
+        contacts!.add(contacts![index]);
+      }
     });
   }
 
@@ -228,8 +225,6 @@ class _ContactScreenState extends State<ContactScreen>
     setState(() {
       _suggestions.addAll(contacts!.getRange(takeIndex, takeIndex + 5));
       takeIndex += 5;
-      log(takeIndex.toString());
-      log(contacts!.length.toString());
     });
   }
 
